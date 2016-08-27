@@ -29,10 +29,14 @@ function Swipe(container, options) {
   if (!container) return;
   var element = container.children[0];
   var slides, slidePos, width, length;
-  options = options || {};
+  options = options || {}; 
   var index = parseInt(options.startSlide, 10) || 0;
-  var speed = options.speed || 300;
+  var speed = options.speed || 800;
+    
   options.continuous = options.continuous !== undefined ? options.continuous : true;
+    
+  options.initDots = options.initDots || false;
+
 
   function setup() {
 
@@ -83,6 +87,10 @@ function Swipe(container, options) {
     if (!browser.transitions) element.style.left = (index * -width) + 'px';
 
     container.style.visibility = 'visible';
+    
+    if (options.initDots) {
+      options.initDots(length);
+    }
 
   }
 
